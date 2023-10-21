@@ -1,0 +1,74 @@
+schema {
+    query: Query
+}
+
+""" type Episode {
+  id: Int
+  name: String
+  air_date: String
+  episode: String
+  characters: [Character]
+  created: String
+} """
+
+type Character {
+  id: ID
+  name: String
+  status: String
+  species: String
+  type: String
+  gender: String
+  origin: Location
+  location: Location
+  image: String
+  created: String
+}
+
+type Location {
+    id: ID
+    name: String
+    type: String
+    dimension:String
+    residents: [Character]
+    created: String
+}
+
+
+
+
+type LocationsResult {
+    success: Boolean!
+    errors: [String]
+    data: [Location]
+}
+
+type LocationResult {
+    success: Boolean!
+    errors: [String]
+    data: Location
+}
+
+input FilterLocation {
+    type: String,
+    dimension: String
+}
+
+type CharactersResult {
+    success: Boolean!
+    errors: [String]
+    data: [Character]
+}
+
+type CharacterResult {
+    success: Boolean!
+    errors: [String]
+    data: Character
+}
+
+
+type Query {
+    locations(filter: FilterLocation): LocationsResult!
+    location(location_id: ID!): LocationResult!
+    characters: CharactersResult!
+    character(character_id: ID!): CharacterResult!
+}
