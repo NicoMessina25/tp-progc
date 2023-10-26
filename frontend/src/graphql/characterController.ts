@@ -6,6 +6,7 @@ export const CHARACTERS = gql`
             success
             errors
             data {
+                id
                 name
                 gender
                 status

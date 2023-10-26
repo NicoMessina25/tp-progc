@@ -5,7 +5,7 @@ import { FetcherResult } from "@/types/fetcher";
 import { useQuery } from '@apollo/client'
 
 interface UseCharactersProps {
-    entityId?:number
+    entityId?:string
 }
 
 export default function useCharacters(props?:UseCharactersProps):FetcherResult<Character> {

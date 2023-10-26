@@ -9,13 +9,14 @@ export interface KeyValueLabelProps {
     value: string | number | undefined
     errorMessage?: string
     className?:string
+    labelClassName?:string
 }
 
-export default function KeyValueLabel({value,label,errorMessage,className=""}:KeyValueLabelProps) {
+export default function KeyValueLabel({value,label,errorMessage,className="",labelClassName=""}:KeyValueLabelProps) {
     return <div className={`flex flex-col ${className}`}>
         <div className='flex'>
-            <Label text={label} />
-            <Label className='ml-1 font-light' text={value?.toString() ?? ""} />
+            <Label text={label} className={labelClassName} />
+            <Label className={`ml-1 font-light ${labelClassName}`} text={value?.toString() ?? ""} />
         </div>
         <ErrorLabel error={!!errorMessage} text={errorMessage} className='mb-1'  />
     </div>

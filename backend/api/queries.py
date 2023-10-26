@@ -39,3 +39,12 @@ def get_character_resolver(obj, info,character_id):
         payload = ResultDTO(False, [str(error)], [])
     
     return payload
+
+def get_location_stats_resolver(obj, info,location_id):
+    try:
+        data = LocationDAO().get_location_stats(location_id)
+        payload = ResultDTO(True, [], data) 
+    except Exception as error:
+        payload = ResultDTO(False, [str(error)], [])
+    
+    return payload

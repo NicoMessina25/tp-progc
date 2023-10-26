@@ -4,7 +4,7 @@ from ariadne import load_schema_from_path, make_executable_schema, \
     graphql_sync, snake_case_fallback_resolvers, ObjectType
 from ariadne.explorer import ExplorerGraphiQL
 from flask import request, jsonify
-from api.queries import list_locations_resolver, list_characters_resolver,get_location_resolver,get_character_resolver
+from api.queries import list_locations_resolver, list_characters_resolver,get_location_resolver,get_character_resolver,get_location_stats_resolver
 
 load_dotenv()
 
@@ -13,6 +13,7 @@ query.set_field("locations", list_locations_resolver)
 query.set_field("location", get_location_resolver)
 query.set_field("characters", list_characters_resolver)
 query.set_field("character", get_character_resolver)
+query.set_field("locationStats", get_location_stats_resolver)
 
 type_defs = load_schema_from_path("schema.graphql")
 schema = make_executable_schema(

@@ -17,6 +17,9 @@ module.exports = {
     },
     extend: {
       colors: {
+        rickMorty: '#5CAD4A',
+        rickMortyLight: '#A7CB54',
+        rickMortyDark: '#208D45',
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

@@ -26,8 +26,14 @@ import {
 import { Icon } from "@iconify/react/dist/iconify.js"
 import { useState } from "react"
 
+interface ColumnProps<TData> {
+  accessorKey: keyof TData,
+  header:string,
+  filter?:boolean
+}
+
 interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
+  columns: ColumnProps<TData>[]
   data: TData[]
   onEdit?: (item:TData)=> void
   onDelete?: (item:TData) => void,
@@ -56,7 +62,9 @@ export function DataTable<TData, TValue>({
 
   const table = useReactTable({
     data,
-    columns,
+    columns: columns.map(({accessorKey, header}):ColumnDef<TData,TValue>=>{
+      return {accessorKey, header}
+    }),
     getCoreRowModel: getCoreRowModel(),
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
@@ -71,22 +79,19 @@ export function DataTable<TData, TValue>({
   return (
     <div className={`rounded-md border ${className}`} style={style}>
       <div className="flex items-center py-4">
-        <Input
-          placeholder="Filter types..."
-          value={(table.getColumn("type")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("type")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm mx-5"
-        />
-        <Input
-          placeholder="Filter dimensions..."
-          value={(table.getColumn("dimension")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("dimension")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm mx-5"
-        />
+        {columns.map((column)=>
+          column.filter ? <Input
+            key={column.accessorKey.toString()}
+            placeholder={`Filter ${column.header}s...`}
+            value={(table.getColumn(column.accessorKey.toString())?.getFilterValue() as string) ?? ""}
+            onChange={(event) =>
+              table.getColumn(column.accessorKey.toString())?.setFilterValue(event.target.value)
+            }
+            className="max-w-sm mx-5"
+          /> : null
+        )}
+        
+        
       </div>
       <Table>
         <TableHeader>
@@ -119,9 +124,9 @@ export function DataTable<TData, TValue>({
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}
-                {onView && <TableCell><Icon icon={'uil:eye'} onClick={()=> onView(row.original)} className='w-7 h-7 p-1 rounded transition-all hover:text-cyan-300 hover:bg-cyan-50/10 cursor-pointer' /></TableCell>}
-                {onEdit && <TableCell><Icon icon={'material-symbols:edit'} onClick={()=> onEdit(row.original)} className='w-7 h-7 p-1 rounded transition-all hover:text-cyan-300 hover:bg-cyan-50/10 cursor-pointer' /></TableCell>}
-                {onDelete && <TableCell><Icon icon={'mdi:trash'} onClick={()=> onDelete(row.original)} className='w-7 h-7 p-1 rounded transition-all hover:text-cyan-300 hover:bg-cyan-50/10 cursor-pointer' /></TableCell>}
+                {onView && <TableCell><Icon icon={'uil:eye'} onClick={()=> onView(row.original)} className='w-7 h-7 p-1 rounded transition-all hover:text-lime-300 hover:bg-lime-50/10 cursor-pointer' /></TableCell>}
+                {onEdit && <TableCell><Icon icon={'material-symbols:edit'} onClick={()=> onEdit(row.original)} className='w-7 h-7 p-1 rounded transition-all hover:text-lime-300 hover:bg-lime-50/10 cursor-pointer' /></TableCell>}
+                {onDelete && <TableCell><Icon icon={'mdi:trash'} onClick={()=> onDelete(row.original)} className='w-7 h-7 p-1 rounded transition-all hover:text-lime-300 hover:bg-lime-50/10 cursor-pointer' /></TableCell>}
               </TableRow>
             ))
           ) : (

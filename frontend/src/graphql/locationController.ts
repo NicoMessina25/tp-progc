@@ -21,9 +21,27 @@ export const GET_LOCATION = gql`
         dimension
         type
         residents {
+          id
           name
           gender
           status
+        }
+      }
+    }
+  }
+`
+
+export const GET_LOCATION_STATS = gql`
+  query($locationId: ID!)  {
+    locationStats(location_id: $locationId) {
+      data {
+        alive
+        dead
+        current_guests
+        robots_aliens_humans {
+          aliens
+          robots
+          humans
         }
       }
     }

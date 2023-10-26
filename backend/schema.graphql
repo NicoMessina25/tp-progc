@@ -65,10 +65,30 @@ type CharacterResult {
     data: Character
 }
 
+type RobotsAliensHumans {
+    robots: Int
+    aliens: Int
+    humans: Int
+}
+
+type LocationStats {
+    alive: Int
+    dead: Int
+    current_guests:Int
+    robots_aliens_humans:RobotsAliensHumans
+}
+
+type LocationStatsResult {
+    success: Boolean!
+    errors: [String]
+    data: LocationStats
+}
+
 
 type Query {
     locations(filter: FilterLocation): LocationsResult!
     location(location_id: ID!): LocationResult!
     characters: CharactersResult!
     character(character_id: ID!): CharacterResult!
+    locationStats(location_id: ID!):LocationStatsResult!
 }
