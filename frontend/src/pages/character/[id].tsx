@@ -24,7 +24,7 @@ export default function CharacterDetails() {
     return <div className='p-10 lg:p-24 flex flex-col justify-center'>
         <BackButton className='w-fit mb-5'/>
         <Title>{name}</Title>
-        <div className='flex flex-col md:flex-row my-4 items-end'>
+        <div className='flex flex-col md:flex-row my-4 md:items-end'>
             <img src={image} className='rounded-lg mb-4 w-full md:w-1/3' alt={`${name}-image`} />
             <div className='md:ml-3 md:mb-4'>
                 <KeyValueLabel label='Status:' className='bg-gradient-to-r p-1 rounded from-rickMortyDark/30 mb-2' labelClassName='text-xl'  value={status} />
