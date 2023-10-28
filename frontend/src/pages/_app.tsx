@@ -5,7 +5,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
 
 const client = new ApolloClient({
   connectToDevTools: true,
-  uri: "tp-progc-backend.vercel.app/graphql",
+  uri: "https://tp-progc-backend.vercel.app/graphql",
   cache: new InMemoryCache(),
   name: "TransportIt",
   version: "1.0"
