@@ -45,7 +45,7 @@ class LocationDAO():
         }}
       }}
       """
-
+    print("query a: ", url)
     response = requests.post(url=url, json={"query": body})
     print("response status code: ", response.status_code)
     if response.status_code == 200:
