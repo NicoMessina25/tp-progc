@@ -1,8 +1,8 @@
 import requests
-import os
+from api import app
 from .DataFetchHelpers import fetch_results_data, fetch_data
 
-url = os.getenv("DATAAPI")
+url = app.config["DATAAPI"]
 
 
 locationData = """
