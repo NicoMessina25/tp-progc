@@ -50,6 +50,7 @@ class LocationDAO():
     print("response status code: ", response.status_code)
     if response.status_code == 200:
         data = response.json()
+        print(data)
         return fetch_results_data(data, "locations")
     else: return None
 
