@@ -45,12 +45,10 @@ class LocationDAO():
         }}
       }}
       """
-    print("query a: ", url)
     response = requests.post(url=url, json={"query": body})
     print("response status code: ", response.status_code)
     if response.status_code == 200:
         data = response.json()
-        print(data)
         return fetch_results_data(data, "locations")
     else: return None
 
@@ -118,7 +116,6 @@ class LocationDAO():
         result["robots_aliens_humans"]["aliens"] = self.__get_residents_number_by_attribute(residents,"species","alien")
         result["robots_aliens_humans"]["humans"] = self.__get_residents_number_by_attribute(residents,"species","human")
         
-        print(result)
         return result
     else: return None
     
